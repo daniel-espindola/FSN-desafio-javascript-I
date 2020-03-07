@@ -56,16 +56,19 @@ function listarAlunos() {
   let formataData = data => {
     let mes = (data.getMonth() + 1)
     mes = mes < 10 ? '0' + mes : mes
-    return data.getDate() + "/" + mes + "/" + data.getFullYear()
+    let dia = data.getDate()
+    dia = dia < 10 ? '0' + dia : dia
+
+    return dia + "/" + mes + "/" + data.getFullYear()
   }
+  console.log('-'.repeat(50));
 
   for (const aluno of alunosDaEscola) {
-    console.log(
-      `Nome: ${aluno.nome}
-      Notas: ${aluno.notas.join(', ') || "não há"}
-      Cursos: ${aluno.cursos.map(curso => `${curso.nomeDoCurso} | Matrícula: ${formataData(curso.dataMatricula)}`).join('\n\t      ')}
-      Faltas: ${aluno.faltas}`
-    );
+    console.log(`Nome: ${aluno.nome}
+Notas: ${aluno.notas.join(', ') || "não há"}
+Cursos: ${aluno.cursos.map(curso => `${curso.nomeDoCurso} | Matrícula: ${formataData(curso.dataMatricula)}`).join('\n\t      ')}
+Faltas: ${aluno.faltas}
+${'-'.repeat(50)}`);
   }
 }
 
@@ -123,3 +126,5 @@ function aprovarAluno(aluno) {
   else
     console.log(`${aluno.nome} foi reprovado!`);
 }
+
+listarAlunos()
